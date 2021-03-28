@@ -4,6 +4,7 @@ const colors = document.getElementsByClassName("jsColor");
 const range = document.getElementById("jsRange");
 const mode = document.getElementById("jsMode");
 const save = document.getElementById("jsSave");
+const erase = document.getElementById("jsEraser");
 
 const INITIAL_COLOR = "black";
 const CANVAS_SIZE = 700;
@@ -19,6 +20,8 @@ ctx.fillStyle = INITIAL_COLOR;
 
 let painting = false;
 let filling = false;
+let erasing = false;
+let prevColor = null;
 
 function stopPainting() {
   painting = false;
@@ -43,8 +46,16 @@ function onMouseMove(event) {
 
 function handleColorClick(event) {
   const color = event.target.style.backgroundColor;
+
+  if (prevColor !== null && ctx.strokeStyle !== color && ctx.fillStyle !== color) {
+    prevColor.toggle("picked");
+  }
+
+  event.target.classList.toggle("picked");
   ctx.strokeStyle = color;
   ctx.fillStyle = color;
+  prevColor = event.target.classList;
+  console.log(prevColor);
 }
 
 function handleRangeChange(event) {
@@ -80,6 +91,10 @@ function handleSaveClick() {
   link.click();
 }
 
+function handleEraserClick() {
+  ctx.strokeStyle = "white";
+}
+
 if (canvas) {
   canvas.addEventListener("mousemove", onMouseMove);
   canvas.addEventListener("mousedown", startPainting);
@@ -103,4 +118,8 @@ if (mode) {
 
 if (save) {
   save.addEventListener("click", handleSaveClick);
+}
+
+if (erase) {
+  erase.addEventListener("click", handleEraserClick);
 }
