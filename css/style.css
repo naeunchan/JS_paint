@@ -8,9 +8,11 @@ body {
   flex-direction: column;
   align-items: center;
   padding: 50px 0;
+  cursor: url(./image/pen_cursor.jpg) 36 36, auto;
 }
 
 .canvas {
+  display: flex;
   width: 700px;
   height: 700px;
   background-color: white;
@@ -49,6 +51,10 @@ body {
   transform: scale(0.98);
 }
 
+.btn_control .pickedMode {
+  border: 3px solid aqua;
+}
+
 .controls .color_control {
   display: flex;
 }
@@ -61,7 +67,7 @@ body {
   box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
-.color_control .picked {
+.color_control .pickedColor {
   border: 3px solid aqua;
 }
 

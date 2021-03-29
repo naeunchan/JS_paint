@@ -14,11 +14,14 @@
         <input type="range" id="jsRange" min="0.1" max="5.0" value="2.5" step="0.1" />
       </div>
       <div class="btn_control">
-        <button id="jsMode">Fill</button>
-        <button id="jsSave">Save</button>
+        <button id="jsPen" class="pickedMode">Pen</button>
+        <button id="jsFill">Fill</button>
         <button id="jsEraser">Erase</button>
+        <button id="jsSave">Save</button>
       </div>
       <div id="color_control" class="color_control">
+        <div class="color_control jsColor pickedColor" style="background-color: black"></div>
+        <div class="color_control jsColor" style="background-color: white"></div>
         <div class="color_control jsColor" style="background-color: red"></div>
         <div class="color_control jsColor" style="background-color: orange"></div>
         <div class="color_control jsColor" style="background-color: yellow"></div>
@@ -26,8 +29,6 @@
         <div class="color_control jsColor" style="background-color: blue"></div>
         <div class="color_control jsColor" style="background-color: indigo"></div>
         <div class="color_control jsColor" style="background-color: purple"></div>
-        <div class="color_control jsColor" style="background-color: black"></div>
-        <div class="color_control jsColor" style="background-color: white"></div>
       </div>
     </div>
     <script src="./app.js"></script>

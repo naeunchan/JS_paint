@@ -1,8 +1,10 @@
+const body = document.getElementsByTagName("body");
 const canvas = document.getElementById("jsCanvas");
 const ctx = canvas.getContext("2d");
 const colors = document.getElementsByClassName("jsColor");
 const range = document.getElementById("jsRange");
-const mode = document.getElementById("jsMode");
+const pen = document.getElementById("jsPen");
+const fill = document.getElementById("jsFill");
 const save = document.getElementById("jsSave");
 const erase = document.getElementById("jsEraser");
 
@@ -19,9 +21,11 @@ ctx.strokeStyle = INITIAL_COLOR;
 ctx.fillStyle = INITIAL_COLOR;
 
 let painting = false;
-let filling = false;
-let erasing = false;
+let isPen = true;
+let isFill = false;
+let isErase = false;
 let prevColor = null;
+let prevMode = null;
 
 function stopPainting() {
   painting = false;
@@ -48,14 +52,13 @@ function handleColorClick(event) {
   const color = event.target.style.backgroundColor;
 
   if (prevColor !== null && ctx.strokeStyle !== color && ctx.fillStyle !== color) {
-    prevColor.toggle("picked");
+    prevColor.toggle("pickedColor");
   }
 
-  event.target.classList.toggle("picked");
+  event.target.classList.toggle("pickedColor");
   ctx.strokeStyle = color;
   ctx.fillStyle = color;
   prevColor = event.target.classList;
-  console.log(prevColor);
 }
 
 function handleRangeChange(event) {
@@ -63,18 +66,59 @@ function handleRangeChange(event) {
   ctx.lineWidth = size;
 }
 
-function handleModeClick() {
-  if (filling === true) {
-    filling = false;
-    mode.innerText = "Fill";
-  } else {
-    filling = true;
-    mode.innerText = "Paint";
+function handlePenClick(event) {
+  if (prevMode.id !== event.target.id) {
+    prevMode.classList.toggle("pickedMode");
   }
+  console.log(body);
+  if (!isPen) {
+    isPen = true;
+    isFill = false;
+    isErase = false;
+    ctx.globalCompositeOperation = "source-over";
+    // body[0].style.cursor =
+    //   "url('https://www.flaticon.com/svg/vstatic/svg/63/63438.svg?token=exp=1617025973~hmac=427b741db0a8f350e9bf07e125c1d8bb') 10 10, auto";
+    event.target.classList.toggle("pickedMode");
+  }
+
+  prevMode = event.target;
+}
+
+function handleFillClick(event) {
+  if (prevMode.id !== event.target.id) {
+    prevMode.classList.toggle("pickedMode");
+  }
+
+  if (!isFill) {
+    isFill = true;
+    isPen = false;
+    isErase = false;
+    ctx.globalCompositeOperation = "source-over";
+    event.target.classList.toggle("pickedMode");
+  }
+
+  prevMode = event.target;
+}
+
+function handleEraserClick(event) {
+  if (prevMode.id !== event.target.id) {
+    prevMode.classList.toggle("pickedMode");
+  }
+
+  if (!isErase) {
+    isErase = true;
+    isPen = false;
+    isFill = false;
+    // ctx.strokeStyle = "white";
+    ctx.globalCompositeOperation = "destination-out";
+    event.target.classList.toggle("pickedMode");
+  }
+
+  prevMode = event.target;
 }
 
 function handleCanvasClick() {
-  if (filling) {
+  if (isFill) {
     ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
   }
 }
@@ -91,10 +135,6 @@ function handleSaveClick() {
   link.click();
 }
 
-function handleEraserClick() {
-  ctx.strokeStyle = "white";
-}
-
 if (canvas) {
   canvas.addEventListener("mousemove", onMouseMove);
   canvas.addEventListener("mousedown", startPainting);
@@ -105,15 +145,25 @@ if (canvas) {
 }
 
 if (colors) {
-  Array.from(colors).forEach((color) => color.addEventListener("click", handleColorClick));
+  Array.from(colors).forEach((color) => {
+    if (color.style.backgroundColor === INITIAL_COLOR) {
+      prevColor = color.classList;
+    }
+    color.addEventListener("click", handleColorClick);
+  });
 }
 
 if (range) {
   range.addEventListener("input", handleRangeChange);
 }
 
-if (mode) {
-  mode.addEventListener("click", handleModeClick);
+if (pen) {
+  prevMode = pen;
+  pen.addEventListener("click", handlePenClick);
+}
+
+if (fill) {
+  fill.addEventListener("click", handleFillClick);
 }
 
 if (save) {
