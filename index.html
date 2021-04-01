@@ -5,16 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/style.css" />
+    <link rel="shortcut icon" href="./css/image/js.png" type="image/x-icon" />
     <title>PaintJS</title>
   </head>
   <body>
-    <canvas id="jsCanvas" class="canvas"> </canvas>
+    <canvas id="jsCanvas" class="canvas cursor"> </canvas>
     <div class="controls">
       <div class="range_control">
         <input type="range" id="jsRange" min="0.1" max="5.0" value="2.5" step="0.1" />
       </div>
       <div class="btn_control">
-        <button id="jsPen" class="pickedMode">Pen</button>
+        <button id="jsPen" class="pickedMode">Brush</button>
         <button id="jsFill">Fill</button>
         <button id="jsEraser">Erase</button>
         <button id="jsSave">Save</button>
@@ -29,8 +30,10 @@
         <div class="color_control jsColor" style="background-color: blue"></div>
         <div class="color_control jsColor" style="background-color: indigo"></div>
         <div class="color_control jsColor" style="background-color: purple"></div>
+        <div class="color_control others"></div>
       </div>
     </div>
     <script src="./app.js"></script>
+    <script src="./jscolor.js"></script>
   </body>
 </html>

@@ -9,6 +9,7 @@ const save = document.getElementById("jsSave");
 const erase = document.getElementById("jsEraser");
 
 const INITIAL_COLOR = "black";
+const ERASER_COLOR = "white";
 const CANVAS_SIZE = 700;
 
 canvas.width = CANVAS_SIZE;
@@ -26,6 +27,7 @@ let isFill = false;
 let isErase = false;
 let prevColor = null;
 let prevMode = null;
+let currentColor = INITIAL_COLOR;
 
 function stopPainting() {
   painting = false;
@@ -56,8 +58,12 @@ function handleColorClick(event) {
   }
 
   event.target.classList.toggle("pickedColor");
-  ctx.strokeStyle = color;
-  ctx.fillStyle = color;
+
+  if (!isErase) {
+    ctx.strokeStyle = color;
+    ctx.fillStyle = color;
+  }
+  currentColor = color;
   prevColor = event.target.classList;
 }
 
@@ -67,17 +73,20 @@ function handleRangeChange(event) {
 }
 
 function handlePenClick(event) {
+  canvas.style.cursor = "url('./css/image/pen_cursor.png') 0 50, default";
+
   if (prevMode.id !== event.target.id) {
     prevMode.classList.toggle("pickedMode");
   }
-  console.log(body);
+
+  if (isErase) {
+    ctx.strokeStyle = currentColor;
+  }
+
   if (!isPen) {
     isPen = true;
     isFill = false;
     isErase = false;
-    ctx.globalCompositeOperation = "source-over";
-    // body[0].style.cursor =
-    //   "url('https://www.flaticon.com/svg/vstatic/svg/63/63438.svg?token=exp=1617025973~hmac=427b741db0a8f350e9bf07e125c1d8bb') 10 10, auto";
     event.target.classList.toggle("pickedMode");
   }
 
@@ -85,15 +94,21 @@ function handlePenClick(event) {
 }
 
 function handleFillClick(event) {
+  canvas.style.cursor = "url('./css/image/fill_cursor.png') 0 50, default";
+  canvas.style.zIndex = 5;
+
   if (prevMode.id !== event.target.id) {
     prevMode.classList.toggle("pickedMode");
+  }
+
+  if (isErase) {
+    ctx.fillStyle = currentColor;
   }
 
   if (!isFill) {
     isFill = true;
     isPen = false;
     isErase = false;
-    ctx.globalCompositeOperation = "source-over";
     event.target.classList.toggle("pickedMode");
   }
 
@@ -101,6 +116,8 @@ function handleFillClick(event) {
 }
 
 function handleEraserClick(event) {
+  canvas.style.cursor = "url('./css/image/eraser_cursor.png') 0 50, default";
+
   if (prevMode.id !== event.target.id) {
     prevMode.classList.toggle("pickedMode");
   }
@@ -109,8 +126,7 @@ function handleEraserClick(event) {
     isErase = true;
     isPen = false;
     isFill = false;
-    // ctx.strokeStyle = "white";
-    ctx.globalCompositeOperation = "destination-out";
+    ctx.strokeStyle = ERASER_COLOR;
     event.target.classList.toggle("pickedMode");
   }
 
