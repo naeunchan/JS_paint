@@ -7,6 +7,7 @@ const pen = document.getElementById("jsPen");
 const fill = document.getElementById("jsFill");
 const save = document.getElementById("jsSave");
 const erase = document.getElementById("jsEraser");
+const picker = document.getElementById("colorPicker");
 
 const INITIAL_COLOR = "black";
 const ERASER_COLOR = "white";
@@ -87,6 +88,7 @@ function handlePenClick(event) {
     isPen = true;
     isFill = false;
     isErase = false;
+    isPick = false;
     event.target.classList.toggle("pickedMode");
   }
 
@@ -109,6 +111,7 @@ function handleFillClick(event) {
     isFill = true;
     isPen = false;
     isErase = false;
+    isPick = false;
     event.target.classList.toggle("pickedMode");
   }
 
@@ -126,6 +129,7 @@ function handleEraserClick(event) {
     isErase = true;
     isPen = false;
     isFill = false;
+    isPick = false;
     ctx.strokeStyle = ERASER_COLOR;
     event.target.classList.toggle("pickedMode");
   }
@@ -150,6 +154,10 @@ function handleSaveClick() {
   link.download = "PaintJS_Result";
   link.click();
 }
+
+// function handlePickerClick() {
+//   console.log("picker");
+// }
 
 if (canvas) {
   canvas.addEventListener("mousemove", onMouseMove);
@@ -189,3 +197,8 @@ if (save) {
 if (erase) {
   erase.addEventListener("click", handleEraserClick);
 }
+
+//Color Picker
+// if (picker) {
+//   picker.addEventListener("click", handlePickerClick);
+// }

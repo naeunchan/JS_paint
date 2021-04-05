@@ -74,10 +74,32 @@ body {
   border: 3px solid aqua;
 }
 
-.color_control .others {
+.color_control .colorPicker {
   background-image: url("./image/others.png");
   background-repeat: no-repeat;
   background-position: center;
+}
+
+#picker {
+  -webkit-appearance: none;
+  padding: 0;
+  border: none;
+  border-radius: 10px;
+  width: 20px;
+  height: 20px;
+  color: white;
+}
+#picker::-webkit-color-swatch {
+  border: none;
+  border-radius: 10px;
+  padding: 0;
+  color: white;
+}
+#picker::-webkit-color-swatch-wrapper {
+  border: none;
+  border-radius: 10px;
+  padding: 0;
+  color: white;
 }
 
 .controls .range_control {
