@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="shortcut icon" href="./css/image/js.png" type="image/x-icon" />
+    <script src="https://unpkg.com/vanilla-picker@2"></script>
     <title>PaintJS</title>
   </head>
   <body>
@@ -21,17 +22,20 @@
         <button id="jsSave">Save</button>
       </div>
       <div id="color_control" class="color_control">
-        <div class="color_control jsColor pickedColor" style="background-color: black"></div>
-        <div class="color_control jsColor" style="background-color: white"></div>
-        <div class="color_control jsColor" style="background-color: red"></div>
-        <div class="color_control jsColor" style="background-color: orange"></div>
-        <div class="color_control jsColor" style="background-color: yellow"></div>
-        <div class="color_control jsColor" style="background-color: green"></div>
-        <div class="color_control jsColor" style="background-color: blue"></div>
-        <div class="color_control jsColor" style="background-color: indigo"></div>
-        <div class="color_control jsColor" style="background-color: purple"></div>
-        <div class="color_control colorPicker" id="colorPicker"></div>
-        <input type="color" class="" id="picker" />
+        <div
+          class="color_control jsColor pickedColor"
+          id="black"
+          style="background-color: black"
+        ></div>
+        <div class="color_control jsColor" id="white" style="background-color: white"></div>
+        <div class="color_control jsColor" id="red" style="background-color: red"></div>
+        <div class="color_control jsColor" id="orange" style="background-color: orange"></div>
+        <div class="color_control jsColor" id="yellow" style="background-color: yellow"></div>
+        <div class="color_control jsColor" id="green" style="background-color: green"></div>
+        <div class="color_control jsColor" id="blue" style="background-color: blue"></div>
+        <div class="color_control jsColor" id="indigo" style="background-color: indigo"></div>
+        <div class="color_control jsColor" id="purple" style="background-color: purple"></div>
+        <div class="color_control colorPicker" id="parent"></div>
       </div>
     </div>
     <script src="./app.js"></script>

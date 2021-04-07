@@ -68,6 +68,7 @@ body {
   border-radius: 25px;
   cursor: pointer;
   box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+  margin-left: 1rem;
 }
 
 .color_control .pickedColor {
@@ -78,28 +79,6 @@ body {
   background-image: url("./image/others.png");
   background-repeat: no-repeat;
   background-position: center;
-}
-
-#picker {
-  -webkit-appearance: none;
-  padding: 0;
-  border: none;
-  border-radius: 10px;
-  width: 20px;
-  height: 20px;
-  color: white;
-}
-#picker::-webkit-color-swatch {
-  border: none;
-  border-radius: 10px;
-  padding: 0;
-  color: white;
-}
-#picker::-webkit-color-swatch-wrapper {
-  border: none;
-  border-radius: 10px;
-  padding: 0;
-  color: white;
 }
 
 .controls .range_control {
